@@ -23,6 +23,10 @@ jobs:
     steps:
     - run: echo "test2";
   test3:
+    if: |
+      always()
+      && contains(needs.*.result, 'success')
+      && !contains(needs.*.result, 'failure')
     needs: [ test,test2 ]
     runs-on: ubuntu-22.04
     steps:
